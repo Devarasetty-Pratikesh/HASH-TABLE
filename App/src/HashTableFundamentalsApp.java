@@ -1,30 +1,35 @@
-import java.util.*;
+import java.util.HashMap;
 
-public class HashTableFundamentalsApp {
-    public static void main(String[] args) {
-        HashMap<String, Integer> stock = new HashMap<>();
-        HashMap<String, Queue<Integer>> waitingList = new HashMap<>();
+class DNSEntry {
+    String ip;
+    long expiryTime;
 
-        stock.put("IPHONE15_256GB", 3);
-        waitingList.put("IPHONE15_256GB", new LinkedList<>());
-
-        purchaseItem(stock, waitingList, "IPHONE15_256GB", 101);
-        purchaseItem(stock, waitingList, "IPHONE15_256GB", 102);
-        purchaseItem(stock, waitingList, "IPHONE15_256GB", 103);
-        purchaseItem(stock, waitingList, "IPHONE15_256GB", 104);
-
-        System.out.println("Stock Left: " + stock.get("IPHONE15_256GB"));
-        System.out.println("Waiting List: " + waitingList.get("IPHONE15_256GB"));
+    DNSEntry(String ip, long ttlMillis) {
+        this.ip = ip;
+        this.expiryTime = System.currentTimeMillis() + ttlMillis;
     }
 
-    static void purchaseItem(HashMap<String, Integer> stock, HashMap<String, Queue<Integer>> waitingList, String productId, int userId) {
-        int available = stock.getOrDefault(productId, 0);
-        if (available > 0) {
-            stock.put(productId, available - 1);
-            System.out.println("User " + userId + " purchased " + productId);
+    boolean isExpired() {
+        return System.currentTimeMillis() > expiryTime;
+    }
+}
+
+public class HashTableFundamentalsApp {
+    public static void main(String[] args) throws InterruptedException {
+        HashMap<String, DNSEntry> cache = new HashMap<>();
+
+        cache.put("google.com", new DNSEntry("172.217.14.206", 3000));
+
+        resolve(cache, "google.com");
+        Thread.sleep(4000);
+        resolve(cache, "google.com");
+    }
+
+    static void resolve(HashMap<String, DNSEntry> cache, String domain) {
+        if (cache.containsKey(domain) && !cache.get(domain).isExpired()) {
+            System.out.println(domain + " -> Cache HIT -> " + cache.get(domain).ip);
         } else {
-            waitingList.get(productId).offer(userId);
-            System.out.println("User " + userId + " added to waiting list");
+            System.out.println(domain + " -> Cache MISS or EXPIRED");
         }
     }
 }
