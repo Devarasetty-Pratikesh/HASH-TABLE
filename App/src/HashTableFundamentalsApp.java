@@ -1,33 +1,43 @@
-import java.util.*;
+import java.util.HashMap;
+
+class ClientRequest {
+    int count;
+    long startTime;
+
+    ClientRequest() {
+        count = 0;
+        startTime = System.currentTimeMillis();
+    }
+}
 
 public class HashTableFundamentalsApp {
+    static final int LIMIT = 5;
+    static final long WINDOW = 60000;
+
     public static void main(String[] args) {
-        HashMap<String, Integer> pageViews = new HashMap<>();
-        HashMap<String, HashSet<String>> uniqueVisitors = new HashMap<>();
-        HashMap<String, Integer> trafficSource = new HashMap<>();
+        HashMap<String, ClientRequest> clients = new HashMap<>();
 
-        processEvent(pageViews, uniqueVisitors, trafficSource, "/home", "u1", "Google");
-        processEvent(pageViews, uniqueVisitors, trafficSource, "/home", "u2", "Facebook");
-        processEvent(pageViews, uniqueVisitors, trafficSource, "/about", "u1", "Google");
-
-        System.out.println("Page Views: " + pageViews);
-        System.out.println("Unique Visitors: ");
-        for (String page : uniqueVisitors.keySet()) {
-            System.out.println(page + " -> " + uniqueVisitors.get(page).size());
+        for (int i = 1; i <= 7; i++) {
+            checkRateLimit(clients, "client1");
         }
-        System.out.println("Traffic Sources: " + trafficSource);
     }
 
-    static void processEvent(HashMap<String, Integer> pageViews,
-                             HashMap<String, HashSet<String>> uniqueVisitors,
-                             HashMap<String, Integer> trafficSource,
-                             String page, String user, String source) {
+    static void checkRateLimit(HashMap<String, ClientRequest> clients, String clientId) {
+        clients.putIfAbsent(clientId, new ClientRequest());
+        ClientRequest request = clients.get(clientId);
 
-        pageViews.put(page, pageViews.getOrDefault(page, 0) + 1);
+        long now = System.currentTimeMillis();
 
-        uniqueVisitors.putIfAbsent(page, new HashSet<>());
-        uniqueVisitors.get(page).add(user);
+        if (now - request.startTime > WINDOW) {
+            request.count = 0;
+            request.startTime = now;
+        }
 
-        trafficSource.put(source, trafficSource.getOrDefault(source, 0) + 1);
+        if (request.count < LIMIT) {
+            request.count++;
+            System.out.println("Allowed. Remaining: " + (LIMIT - request.count));
+        } else {
+            System.out.println("Denied. Limit exceeded.");
+        }
     }
 }

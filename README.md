@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 5 - Real-Time Analytics Dashboard
+## Use Case 6 - Distributed Rate Limiter
 
 ### Objective
-To track page views, unique visitors, and traffic sources using hash tables.
+To limit requests per client using HashMap and time window logic.
 
 ### Concepts Used
 - HashMap
-- HashSet
-- Frequency counting
-- Real-time analytics
+- Fixed window
+- Request counting
+- Time-based reset
 
 ### Flow
-1. Count page visits
-2. Track unique users per page
-3. Track source counts
-4. Display analytics
+1. Store client request details
+2. Check request count
+3. Reset after time window
+4. Allow or deny request
