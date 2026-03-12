@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 8 - Parking Lot Management
+## Use Case 9 - Two Sum Financial Transactions
 
 ### Objective
-To assign parking spots using open addressing and linear probing.
+To detect transaction pairs that sum to a target amount efficiently.
 
 ### Concepts Used
-- Array-based hash table
-- Open addressing
-- Linear probing
-- Collision handling
+- HashMap
+- Complement lookup
+- O(1) search
+- Fraud detection logic
 
 ### Flow
-1. Generate hash from license plate
-2. Find empty spot using probing
-3. Assign parking spot
-4. Remove vehicle on exit
+1. Read transaction amounts
+2. Compute complement
+3. Check if complement exists
+4. Print matching pair
