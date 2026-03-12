@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 9 - Two Sum Financial Transactions
+## Use Case 10 - Multi-Level Cache System
 
 ### Objective
-To detect transaction pairs that sum to a target amount efficiently.
+To simulate cache storage and LRU eviction using LinkedHashMap.
 
 ### Concepts Used
-- HashMap
-- Complement lookup
-- O(1) search
-- Fraud detection logic
+- LinkedHashMap
+- LRU eviction
+- Cache design
+- Fast lookup
 
 ### Flow
-1. Read transaction amounts
-2. Compute complement
-3. Check if complement exists
-4. Print matching pair
+1. Store data in cache
+2. Access frequently used data
+3. Add new data
+4. Remove least recently used item
