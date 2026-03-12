@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 7 - Autocomplete System
+## Use Case 8 - Parking Lot Management
 
 ### Objective
-To suggest search queries based on prefix matching and frequency.
+To assign parking spots using open addressing and linear probing.
 
 ### Concepts Used
-- HashMap
-- Prefix matching
-- Frequency storage
-- Search suggestion
+- Array-based hash table
+- Open addressing
+- Linear probing
+- Collision handling
 
 ### Flow
-1. Store search queries with counts
-2. Accept a prefix
-3. Find matching queries
-4. Display suggestions
+1. Generate hash from license plate
+2. Find empty spot using probing
+3. Assign parking spot
+4. Remove vehicle on exit

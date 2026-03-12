@@ -1,25 +1,37 @@
-import java.util.*;
-
 public class HashTableFundamentalsApp {
+    static String[] parking = new String[10];
+
     public static void main(String[] args) {
-        HashMap<String, Integer> queries = new HashMap<>();
-        queries.put("java tutorial", 100);
-        queries.put("javascript", 80);
-        queries.put("java download", 60);
-        queries.put("python course", 70);
+        parkVehicle("ABC123");
+        parkVehicle("XYZ999");
+        parkVehicle("ABC124");
+        exitVehicle("XYZ999");
+    }
 
-        String prefix = "jav";
-        List<String> result = new ArrayList<>();
+    static int hash(String plate) {
+        return Math.abs(plate.hashCode()) % parking.length;
+    }
 
-        for (String query : queries.keySet()) {
-            if (query.startsWith(prefix)) {
-                result.add(query + " (" + queries.get(query) + ")");
-            }
+    static void parkVehicle(String plate) {
+        int index = hash(plate);
+        int probes = 0;
+
+        while (parking[index] != null) {
+            index = (index + 1) % parking.length;
+            probes++;
         }
 
-        System.out.println("Suggestions:");
-        for (String s : result) {
-            System.out.println(s);
+        parking[index] = plate;
+        System.out.println(plate + " parked at " + index + " with " + probes + " probes");
+    }
+
+    static void exitVehicle(String plate) {
+        for (int i = 0; i < parking.length; i++) {
+            if (plate.equals(parking[i])) {
+                parking[i] = null;
+                System.out.println(plate + " exited from " + i);
+                return;
+            }
         }
     }
 }
