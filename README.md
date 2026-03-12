@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 4 - Plagiarism Detection System
+## Use Case 5 - Real-Time Analytics Dashboard
 
 ### Objective
-To compare documents using n-grams and hash-based matching.
+To track page views, unique visitors, and traffic sources using hash tables.
 
 ### Concepts Used
+- HashMap
 - HashSet
-- String processing
-- n-grams
-- Similarity calculation
+- Frequency counting
+- Real-time analytics
 
 ### Flow
-1. Break document into n-grams
-2. Store in HashSet
-3. Compare n-grams
-4. Calculate similarity percentage
+1. Count page visits
+2. Track unique users per page
+3. Track source counts
+4. Display analytics
