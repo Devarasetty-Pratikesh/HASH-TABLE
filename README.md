@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 3 - DNS Cache with TTL
+## Use Case 4 - Plagiarism Detection System
 
 ### Objective
-To implement a DNS cache using HashMap with expiration logic.
+To compare documents using n-grams and hash-based matching.
 
 ### Concepts Used
-- HashMap
-- TTL
-- Cache hit/miss
-- Time-based expiry
+- HashSet
+- String processing
+- n-grams
+- Similarity calculation
 
 ### Flow
-1. Store domain and IP mapping
-2. Save expiry time
-3. Check if entry exists and is valid
-4. Return HIT or MISS
+1. Break document into n-grams
+2. Store in HashSet
+3. Compare n-grams
+4. Calculate similarity percentage
