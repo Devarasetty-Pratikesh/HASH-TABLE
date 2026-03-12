@@ -1,35 +1,35 @@
-import java.util.HashMap;
-
-class DNSEntry {
-    String ip;
-    long expiryTime;
-
-    DNSEntry(String ip, long ttlMillis) {
-        this.ip = ip;
-        this.expiryTime = System.currentTimeMillis() + ttlMillis;
-    }
-
-    boolean isExpired() {
-        return System.currentTimeMillis() > expiryTime;
-    }
-}
+import java.util.*;
 
 public class HashTableFundamentalsApp {
-    public static void main(String[] args) throws InterruptedException {
-        HashMap<String, DNSEntry> cache = new HashMap<>();
+    public static void main(String[] args) {
+        String doc1 = "java is easy to learn and java is powerful";
+        String doc2 = "java is easy to use and java is powerful";
 
-        cache.put("google.com", new DNSEntry("172.217.14.206", 3000));
+        Set<String> ngrams1 = getNGrams(doc1, 3);
+        Set<String> ngrams2 = getNGrams(doc2, 3);
 
-        resolve(cache, "google.com");
-        Thread.sleep(4000);
-        resolve(cache, "google.com");
+        int matches = 0;
+        for (String gram : ngrams1) {
+            if (ngrams2.contains(gram)) {
+                matches++;
+            }
+        }
+
+        double similarity = (double) matches / Math.max(ngrams1.size(), ngrams2.size()) * 100;
+        System.out.println("Similarity: " + similarity + "%");
     }
 
-    static void resolve(HashMap<String, DNSEntry> cache, String domain) {
-        if (cache.containsKey(domain) && !cache.get(domain).isExpired()) {
-            System.out.println(domain + " -> Cache HIT -> " + cache.get(domain).ip);
-        } else {
-            System.out.println(domain + " -> Cache MISS or EXPIRED");
+    static Set<String> getNGrams(String text, int n) {
+        String[] words = text.split(" ");
+        Set<String> grams = new HashSet<>();
+
+        for (int i = 0; i <= words.length - n; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = i; j < i + n; j++) {
+                sb.append(words[j]).append(" ");
+            }
+            grams.add(sb.toString().trim());
         }
+        return grams;
     }
 }
