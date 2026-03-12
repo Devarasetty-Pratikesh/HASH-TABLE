@@ -1,29 +1,30 @@
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class HashTableFundamentalsApp {
     public static void main(String[] args) {
-        HashMap<String, Integer> usernames = new HashMap<>();
-        HashMap<String, Integer> attempts = new HashMap<>();
+        HashMap<String, Integer> stock = new HashMap<>();
+        HashMap<String, Queue<Integer>> waitingList = new HashMap<>();
 
-        usernames.put("john_doe", 101);
-        usernames.put("alice123", 102);
+        stock.put("IPHONE15_256GB", 3);
+        waitingList.put("IPHONE15_256GB", new LinkedList<>());
 
-        String checkName = "john_doe";
+        purchaseItem(stock, waitingList, "IPHONE15_256GB", 101);
+        purchaseItem(stock, waitingList, "IPHONE15_256GB", 102);
+        purchaseItem(stock, waitingList, "IPHONE15_256GB", 103);
+        purchaseItem(stock, waitingList, "IPHONE15_256GB", 104);
 
-        if (usernames.containsKey(checkName)) {
-            System.out.println(checkName + " is already taken");
-            attempts.put(checkName, attempts.getOrDefault(checkName, 0) + 1);
+        System.out.println("Stock Left: " + stock.get("IPHONE15_256GB"));
+        System.out.println("Waiting List: " + waitingList.get("IPHONE15_256GB"));
+    }
 
-            List<String> suggestions = new ArrayList<>();
-            suggestions.add(checkName + "1");
-            suggestions.add(checkName + "2");
-            suggestions.add(checkName.replace("_", "."));
-
-            System.out.println("Suggestions: " + suggestions);
+    static void purchaseItem(HashMap<String, Integer> stock, HashMap<String, Queue<Integer>> waitingList, String productId, int userId) {
+        int available = stock.getOrDefault(productId, 0);
+        if (available > 0) {
+            stock.put(productId, available - 1);
+            System.out.println("User " + userId + " purchased " + productId);
         } else {
-            System.out.println(checkName + " is available");
+            waitingList.get(productId).offer(userId);
+            System.out.println("User " + userId + " added to waiting list");
         }
     }
 }

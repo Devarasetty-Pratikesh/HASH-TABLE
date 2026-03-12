@@ -1,19 +1,18 @@
 # HashTableFundamentalsApp
 
-## Objective
-To understand the fundamentals of hash tables using a real-world Java problem.
+## Use Case 2 - Flash Sale Inventory Manager
 
-## Use Case
-UC1 - Username Availability Checker
+### Objective
+To manage product stock efficiently during flash sales using HashMap.
 
-## Concepts Used
+### Concepts Used
 - HashMap
+- Queue
 - O(1) lookup
-- Frequency counting
-- Suggestion generation
+- Waiting list handling
 
-## Flow
-1. Store usernames in a HashMap
-2. Check if username exists
-3. If taken, suggest alternatives
-4. Track attempted usernames
+### Flow
+1. Store product stock in HashMap
+2. Check stock availability
+3. Decrease stock after purchase
+4. Add users to waiting list if stock is empty
