@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 6 - Distributed Rate Limiter
+## Use Case 7 - Autocomplete System
 
 ### Objective
-To limit requests per client using HashMap and time window logic.
+To suggest search queries based on prefix matching and frequency.
 
 ### Concepts Used
 - HashMap
-- Fixed window
-- Request counting
-- Time-based reset
+- Prefix matching
+- Frequency storage
+- Search suggestion
 
 ### Flow
-1. Store client request details
-2. Check request count
-3. Reset after time window
-4. Allow or deny request
+1. Store search queries with counts
+2. Accept a prefix
+3. Find matching queries
+4. Display suggestions
