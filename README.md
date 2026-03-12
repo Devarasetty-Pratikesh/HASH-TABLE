@@ -1,18 +1,18 @@
 # HashTableFundamentalsApp
 
-## Use Case 2 - Flash Sale Inventory Manager
+## Use Case 3 - DNS Cache with TTL
 
 ### Objective
-To manage product stock efficiently during flash sales using HashMap.
+To implement a DNS cache using HashMap with expiration logic.
 
 ### Concepts Used
 - HashMap
-- Queue
-- O(1) lookup
-- Waiting list handling
+- TTL
+- Cache hit/miss
+- Time-based expiry
 
 ### Flow
-1. Store product stock in HashMap
-2. Check stock availability
-3. Decrease stock after purchase
-4. Add users to waiting list if stock is empty
+1. Store domain and IP mapping
+2. Save expiry time
+3. Check if entry exists and is valid
+4. Return HIT or MISS
